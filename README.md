@@ -2,10 +2,10 @@
 
 Repository for HW assignments of Stat 133 (Fall 2017)
 
-- Student name: First Last
+- Student name: Matthew Brennan
 - Github username: usrname
-- Lab section: 101
-- GSI: Leia Organa
+- Lab section: 102
+- GSI: C. Mao
 
 -----
 
