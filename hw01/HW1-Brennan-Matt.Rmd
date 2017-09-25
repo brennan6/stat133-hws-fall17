@@ -1,0 +1,228 @@
+---
+title: "Hw1-Brennan-Matt"
+author: "Matt Brennan"
+date: "9/22/2017"
+output: github_document
+---
+
+
+```{r}
+dat <- load("data/nba2017-salary-points.RData")
+ls()
+
+```
+#1salary in terms of millions
+```{r}
+short_salary <- round(salary/1000000,2)
+short_salary
+```
+#replace "R" with "0" in experience
+```{r}
+experience_new = replace(experience, experience == "R", 0)
+experience_new
+```
+#changing the abbrev. of the positions
+```{r}
+?factor
+
+fposition = factor(position, labels = c("center", 'power_fwd','point_gaurd','small_fwd','shoot_gaurd'))
+fposition
+```
+#frequencies of the positions using table
+```{r}
+table(fposition)
+```
+#2scatterplot with points and salaries
+```{r}
+plot(points, short_salary)
+```
+```{r}
+plot(points,short_salary, cex = .5, col = "dark red")
+```
+```{r}
+
+```
+
+```{r}
+plot(points, short_salary, pch = "*")
+```
+
+#3 Correlation between points and salary
+#define variables, use them to calcualte correlation
+```{r}
+n <- length(points)
+n
+```
+#mean points scored
+```{r}
+mean_points <-sum(points)/length(points)
+mean_points
+```
+#mean salary
+```{r}
+mean_salary <- sum(short_salary)/length(short_salary)
+mean_salary
+```
+#points variance
+```{r}
+var_points <- sum((points-mean_points)^2)/(n-1)
+var_points
+```
+#salary variance
+```{r}
+var_salary <- sum((short_salary-mean_salary)^2)/(n-1)
+var_salary
+```
+#points Sd
+```{r}
+points_sd <- sqrt(var_points)
+points_sd
+```
+#salary sd
+```{r}
+salary_sd <- sqrt(var_salary)
+salary_sd
+```
+#covariance
+```{r}
+cov <- sum((points - mean_points)*(short_salary-mean_salary))/(n-1)
+cov
+```
+#correlation
+```{r}
+corr <- cov/(points_sd*salary_sd)
+corr
+```
+#4 Simple Linear Regression
+#calculate the slope
+```{r}
+b1 = corr*(salary_sd/points_sd)
+b1
+```
+#calculate the intercept
+```{r}
+b0 = mean_salary - b1*mean_points
+b0
+```
+#calculate y_hat
+```{r}
+y_hat = b0 + (b1*points)
+y_hat
+```
+#summary statistics
+```{r}
+summary(y_hat)
+```
+#What is the regression equation?
+```{r}
+y_hat = b0 + (b1*points)
+```
+#How do you interpret the slope coefficient b1?
+The predicted increase in salary in millions of dollars for a certain amount of points scored.
+#How do you interpret the intercept term b0?
+The intercept represents the predicted salary when there are 0 points scored and thus the minimum amount one would expect for the arguably the worst player.
+#What is the predicted salary for the player that scores:
+0 points = b0 = 1.51
+```{r}
+points_scored_0 = b0 + (b1*0)
+points_scored_0
+```
+100 points = 2.36
+```{r}
+points_scored_100 = b0 + (b1*100)
+points_scored_100
+```
+500 points = 5.79
+```{r}
+points_scored_500 = b0 + (b1*500)
+points_scored_500
+```
+1000 points = 10.07
+```{r}
+points_scored_1000 = b0 +(b1*1000)
+points_scored_1000
+
+```
+2000 points = 18.62
+```{r}
+points_scored_2000 = b0 +(b1*2000)
+points_scored_2000
+```
+#5 Plotting the Regression Line
+```{r}
+plot.default(points, short_salary, xlab = "Points", ylab = 'Salary (in millions)', main = 'Scatterplot of Point and Salary')
+abline(b0,b1, col = 'red', lwd = 2)
+lines(lowess(points, short_salary), col = 'blue', lwd = 2)
+text(2400,30,'lowess', col = "orange", cex =.6)
+text(2400,20, 'regression', col = 'purple', cex =.6)
+```
+#6 Regression Residuals and Coefficient of Determination R^2
+The Vector of Residuals
+```{r}
+e <- short_salary - y_hat
+summary(e)
+```
+The Residual Sum of Squares
+```{r}
+rss = sum(e^2)
+rss
+```
+The Total Sum of Squares
+```{r}
+e2 <- short_salary - mean_salary
+tss <- sum((e2)^2)
+tss
+```
+The Coefficient of Determination
+```{r}
+R2 <- 1 - rss/tss
+R2
+```
+#7 Exploring Positions and Experience
+Scatterplot of years of experience and salary
+```{r}
+plot.default(experience,short_salary, xlab = "Experience", ylab = "Salary (in Millions)", col = "blue", main = 'Scatterplot of Experience and Salary')
+
+lines(lowess(experience, short_salary, delta =.5), col = 'red', lwd = 2)
+```
+This scatterplot depicts any form of relationship between experience, in number of years played, and the salary of the individual that exists. By utilizing a lowess line one can see that there is a trend in the direction of higher salaries for more years of experience. However once the years of experience surpass 10, the salary lessens.Through the low starting salaries of players with little experience and the noticeable increase overtime, we can conclude that experience and salary do appear related
+3D Scatterplot
+```{r}
+#scatterplot3d was not accessible and therefore could not finish.
+```
+Conditional boxplot
+```{r}
+?boxplot
+
+plot(fposition, short_salary,  xlab = "Position", ylab = "Salary (in Millions)")
+```
+```{r}
+
+```
+The conditional boxplot provides the median, and the quartile points for the amount of money that individual positions receive.Through this boxplot, one can compare the amount for each position, as the centers have the highest 3rd quartile, while power forwards possess the highest outliers. Yet, position does not appear to be related to salary as for the most part, the positions appear to be rather close in salary comparitively.
+
+#8 Comments and reflection
+
+What things were hard, even though you saw them in class?
+Looking up the definitions and understanding the overall utilization of the functions served to be a difficult part of this lab.
+
+What was easy even though we haven't done it in class?
+Understanding the nuances of the attributes that each function provided seemed like an approachable task.
+
+Did you need help to complete the assignment? If so, what kind of help? Who helped you?
+Peer discssions about the approach to questions and the specific order in which arguments are used in questions helped me better draw conclusions.
+
+What was the most time consuming part?
+Understanding how to use boxplot.
+
+Was ther anything you did not understand? or fully grasped?
+How to actually use the function boxplot.
+
+Was there anything frustrating in particular?
+The lack of guidance on piazza made the project much more difficult.
+
+Was there anything exciting? Something you feel proud of?
+I really like basketball so it is alwasy engaging when we use basketball stats.
+
+
+
