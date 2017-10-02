@@ -7,7 +7,7 @@ output: github_document
 1.Create a Data Dictionary: nba2017-player-statistics-dictionart.md
 2.Import the Data in R
 Reading the data using BASE:
-```{r}
+```{r, eval = TRUE}
 
 system.time(dat <- read.csv("data/nba2017-player-statistics.csv", header = TRUE, colClasses = c("character", "character", "factor", "character", "double", "integer", "integer", "integer", "integer", "integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer")))
 str(dat)
