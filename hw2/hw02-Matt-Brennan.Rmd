@@ -1,0 +1,128 @@
+---
+title: "hw02-Matt-Brennan.Rmd"
+author: "Matt Brennan"
+date: "10/2/2017"
+output: github_document
+---
+1.Create a Data Dictionary: nba2017-player-statistics-dictionart.md
+2.Import the Data in R
+Reading the data using BASE:
+```{r}
+
+system.time(dat <- read.csv("data/nba2017-player-statistics.csv", header = TRUE, colClasses = c("character", "character", "factor", "character", "double", "integer", "integer", "integer", "integer", "integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer","integer")))
+str(dat)
+```
+```{r}
+install.packages("readr", repos = "http://cran.rstudio.com/")
+library(readr)
+```
+
+Reading the data using READR:
+```{r}
+dat_readr = read_csv("data/nba2017-player-statistics.csv",
+                     col_types = cols(col_character(), col_character(), col_factor(levels = c("C", "PF", "PG", "SF", "SG")), col_character(),col_double(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer(), col_integer()))
+str(dat_readr)
+```
+3) Right after importing the data
+```{r}
+install.packages(c("dplyr", "ggplot2"), repos = "http://cran.rstudio.com/" )
+library("dplyr")
+library("ggplot2")
+```
+
+```{r}
+dat <- dat %>% mutate(Experience = replace(dat$Experience, Experience == "R", 0))
+dat <- dat %>% mutate(Experience = as.integer(dat$Experience))
+dat
+
+
+
+```
+4.Perforamance of Players
+
+```{r}
+missed_fg <- dat$FGA - dat$FGM
+missed_ft <- dat$FTA - dat$FTM
+pts <-  dat$Points2*2 + dat$Points3*3 + dat$FTM
+rebs <- dat$OREB + dat$DREB
+MPG <- (dat$MIN / dat$GP)
+EFF = (pts + rebs + dat$AST + dat$STL + dat$BLK - missed_fg - missed_ft - dat$TO)/dat$GP
+summary(EFF)
+hist(EFF, main = "Histogram of EFF", border = "blue", col = "red", las = 1)
+```
+Display the Player name, team, salary, and Eff value of the top ten players by EFF in decreasing order.
+```{r}
+dat <- dat %>% mutate(EFF)
+top_ten_eff <- slice(arrange(select(dat, Player, Team, Salary, EFF), desc(EFF)), 1:10)
+top_ten_eff
+```
+Provide the names of the players that have a hegative EFF.
+```{r}
+negative_eff <- select(filter(dat, EFF < 0), Player)
+negative_eff
+```
+Use the function cor() to compute the correlation coefficient between EEF and all the variables in the EEF formulat
+```{r}
+eff_pts_cor <- cor(dat$EFF, pts)
+eff_rebs_cor <- cor(dat$EFF, rebs)
+eff_asts_cor <- cor(dat$EFF,dat$AST)
+eff_stl_cor <- cor(dat$EFF, dat$STL)
+eff_blk_cor <- cor(dat$EFF, dat$BLK)
+eff_mfg_cor <- -1*cor(dat$EFF, missed_fg)
+eff_mft_cor <- -1*cor(dat$EFF, missed_ft)
+eff_to_cor <- -1*cor(dat$EFF, dat$TO)
+
+
+```
+Make a barplot of the data on corr.
+```{r}
+corr_data = c(eff_pts_cor, eff_rebs_cor, eff_stl_cor,eff_asts_cor,
+              eff_blk_cor,eff_mft_cor,eff_mfg_cor,eff_to_cor)
+barplot(corr_data, main = "Correlations between Player Stats and EFF",
+        names.arg = c('PTS','REB','STL','AST','BLK','MFT','MFG','TO'),
+        col = c("grey", "grey", "grey","grey","grey","red","red", "red"), ylim = c(-1,1))
+```
+5) Efficiency and Salary
+Create a scatterplot between EFF and Salary
+```{r}
+plot(dat$EFF, dat$Salary, xlab = "Efficency", ylab = "Salary", main = "Scatterplot of Effieciency versus Salary", col = "red")
+
+lines(lowess(dat$EFF, dat$Salary,delta = .5), col = "blue", lwd = 2)
+text(27, 25000000, "lowess", col = "orange")
+
+```
+Correlation between EFF and Salary
+```{r}
+cor(dat$EFF, dat$Salary)
+```
+There is a weak correlation between the values of efficiency versus that of salary. The .656 correlation suggests that although certain players are performing very well on the court, they likely aren't compensated well for their relatively high efficiencys. Age may be a very strong factor that contributes to these odd results as many young player likely are not payed well but perform well on the court and the opposite for those with more experience.
+
+Select players that have an MPG greater than 20.
+```{r}
+dat <- dat %>% mutate(MPG)
+players2 <- filter(dat, MPG > 20)
+players2
+```
+Create a scatterplot between players2, efficiency and salary.
+```{r}
+plot(players2$EFF, players2$Salary, main = "Scatterplot of Efficiency versus Salary", xlab = "Efficiency", ylab = "Salary", col = "red")
+
+lines(lowess(players2$EFF, players2$Salary,delta = .5), col = "blue", lwd = 2)
+
+text(27, 24000000, "lowess", col = "orange")
+```
+Compute the linear correlation coefficient between player2, salary and efficiency.
+```{r}
+cor(players2$EFF, players2$Salary)
+```
+There appears to be even less of a positive correlation between salary and efficiency for those that play more minutes in the NBA. One plausible assumption from this is that younger players tend to play in larger amounts than those with more experience, yet do not receive as much pay thus bringing down this correlation. The veterans that remain in the league have proven their ability and organizations are less likely to hire unproven veterans thus these players are less prolific in this group.
+
+6) Comments and Reflection
+ 1) Utilizing the readr information was very difficult for me.
+ 2) Utilizing the certain functions of slice and select.
+ 3) I needed to talk out a couple of the problems with friends for a better understanding
+ 4) 5 hours
+ 5) The Readr part.
+ 6) The other version of the lowess line.
+ 7) Readr attributes.
+ 8) Question 4 and 5
