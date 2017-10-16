@@ -94,10 +94,11 @@ ev <- pca$sdev^2
 prop <- ev/(sum(ev))
 cumprop <- cumsum(prop)
 pca_df <- data.frame(ev,prop,cumprop)
-pc1 <- -1*pca$x[,1]
+pc1 <- pca$x[,1]
 pc2 <-pca$x[,2]
 teams <- teams %>%
   mutate(PC1 = pc1, PC2 = pc2)
+pca_df
 ```
 #scatterplot of first two pcs
 ```{r}
