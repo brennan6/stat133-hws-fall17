@@ -104,22 +104,22 @@ teams <- full_merge %>%
 ggplot(teams, aes(reorder(team, salary), salary)) + geom_bar(stat = 'identity', fill = "gray") +geom_hline(yintercept=mean(teams$salary), color = 'orange', size = 4, alpha = .7) +coord_flip() + labs(x = "Team", y = "Salary(in millions)", title = "NBA Teams ranked by Total Salary")
 ```
 
-![](hw03-Matt-Brennan_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png)
+![](hw03-Matt-Brennan_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png) This graph provides very little about the rankings of the team because salary is hardly a factor in the ability of the team to win games. Yet, it is no mere coincidence that the teams that spend more money appear to do better overall.
 
 ``` r
 ggplot(teams, aes(reorder(team, points), points)) + geom_bar(stat = 'identity', fill = "gray")+geom_hline(yintercept=mean(teams$points), color = 'orange', size = 4, alpha = .7) +coord_flip() + labs(x = "Team", y = "Total Points", title = "NBA Teams ranked by Total Points")
 ```
 
-![](hw03-Matt-Brennan_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-4-1.png) \#barplot with effieciency
+![](hw03-Matt-Brennan_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-4-1.png) This barplot provides some insight into the ability of the team as points scored represents one of the best categories to excel in. Yet, this does not take into account the defense of the team which is another incredibly important category.
+
+barplot with efficiency
+=======================
 
 ``` r
 ggplot(teams, aes(reorder(team, experience), experience)) + geom_bar(stat = 'identity', fill = "gray")+geom_hline(yintercept=mean(teams$experience), color = 'orange', size = 4, alpha = .7) +coord_flip() + labs(x = "Team", y = "Efficiency", title = "NBA Teams ranked by Efficiency")
 ```
 
-![](hw03-Matt-Brennan_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-5-1.png)
-
-PCA analysis
-============
+![](hw03-Matt-Brennan_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-5-1.png) The efficiency likely depicts the best rankings of the team as it takes into account numerous defensive statistics as well as the offensive ones. However, the Warriors, the best team in basketball, are only ranked third overall in this plot. \#PCA analysis
 
 ``` r
 pc1 <- teams %>%
