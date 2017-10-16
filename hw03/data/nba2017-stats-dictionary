@@ -1,0 +1,26 @@
+## Data `nba2017-stats.csv`
+
+Here's the description of the R objects in `nba2017-salary-points.RData`:
+
+- `player`: name of the player.
+- `games_played`: the total number of games played last season.
+- `minutes`: the total number of minutes played last season.
+- `field_goals_made`: number of field goals made in 2017.
+- `field_goals_attempted`: number of field goals attempted in 2017.
+- `field_goals_percentage`: the percentage of field goals made over field goals attempted in 2017.
+- `points3_made`: the three pointers made in 2017.
+- `points3_attempted`: the three pointers attempted in 2017.
+- `points3_percentage`: the percentage of three_point field goals made.
+- `points2_made`: the two pointers made in 2017.
+- `points2_attempted`: the two pointers attempted in 2017.
+- `points2_percentage`: the percentage of two_point field goals made.
+- `points1_made`: the one pointers made in 2017.
+- `points1_attempted`: the one pointers attempted in 2017.
+- `points1_percentage`: the percentage of one_pointers made.
+- `off_rebound`: offensive rebound total in 2017.
+- `def_rebound`: defensive rebound total in 2017.
+- `assists`: assist total in 2017.
+- `steal`: steal total in 2017.
+- `block: block total in 2017.
+- `turnovers: turnover total in 2017.
+- `fouls: foul total in 2017.

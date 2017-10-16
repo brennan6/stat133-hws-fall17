@@ -1,0 +1,22 @@
+## Data `nba2017-roster-csv`
+
+Here's the description of the R objects in `nba2017-salary-points.RData`:
+
+- `player`: name of the player.
+- `team`: team name abbreviation.
+- `position`: player position.
+- `height`: height of the player in inches.
+- `weight`: weight of the player in pounds.
+- `age`: age of the player in years.
+- `experience`: experience of the player measured in seasons.
+- `salary`: salary of the player measured in dollars.
+
+There are five types of player positions (see [wikipedia](https://en.wikipedia.org/wiki/Basketball_positions) for more details):
+
++ `PG`: point guard
++ `SG`: shooting guard
++ `SF`: small forward
++ `PF`: power forward
++ `C`: center
+
+The values in `points` result from adding all scored points:
