@@ -77,7 +77,7 @@ teams <- full_merge %>%
 ggplot(teams, aes(reorder(team, salary), salary)) + geom_bar(stat = 'identity', fill = "gray") +geom_hline(yintercept=mean(teams$salary), color = 'orange', size = 4, alpha = .7) +coord_flip() + labs(x = "Team", y = "Salary(in millions)", title = "NBA Teams ranked by Total Salary")
 ```
 ```{r}
-ggplot(teams, aes(reorder(team, salary), salary)) + geom_bar(stat = 'identity', fill = "gray")+geom_hline(yintercept=mean(teams$salary), color = 'orange', size = 4, alpha = .7) +coord_flip() + labs(x = "Team", y = "Total Points", title = "NBA Teams ranked by Total Points")
+ggplot(teams, aes(reorder(team, points), points)) + geom_bar(stat = 'identity', fill = "gray")+geom_hline(yintercept=mean(teams$points), color = 'orange', size = 4, alpha = .7) +coord_flip() + labs(x = "Team", y = "Total Points", title = "NBA Teams ranked by Total Points")
 ```
 #barplot with effieciency
 ```{r}

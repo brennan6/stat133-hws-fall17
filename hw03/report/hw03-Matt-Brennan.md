@@ -107,7 +107,7 @@ ggplot(teams, aes(reorder(team, salary), salary)) + geom_bar(stat = 'identity', 
 ![](hw03-Matt-Brennan_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-3-1.png)
 
 ``` r
-ggplot(teams, aes(reorder(team, salary), salary)) + geom_bar(stat = 'identity', fill = "gray")+geom_hline(yintercept=mean(teams$salary), color = 'orange', size = 4, alpha = .7) +coord_flip() + labs(x = "Team", y = "Total Points", title = "NBA Teams ranked by Total Points")
+ggplot(teams, aes(reorder(team, points), points)) + geom_bar(stat = 'identity', fill = "gray")+geom_hline(yintercept=mean(teams$points), color = 'orange', size = 4, alpha = .7) +coord_flip() + labs(x = "Team", y = "Total Points", title = "NBA Teams ranked by Total Points")
 ```
 
 ![](hw03-Matt-Brennan_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-4-1.png) \#barplot with effieciency
