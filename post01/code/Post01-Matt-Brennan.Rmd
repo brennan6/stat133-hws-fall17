@@ -2,7 +2,7 @@
 title: "Post01-Matt-Brennan"
 author: "Matt Brennan"
 date: "10/29/2017"
-output: github_document
+output: html_document
 ---
 Hello fellow bloggers,
 
