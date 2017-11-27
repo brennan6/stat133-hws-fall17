@@ -1,0 +1,15 @@
+  minimum percent10 quartile1    median      mean quartile3 percent90   maximum 
+ 18.00000  53.00000  69.00000  80.00000  75.91377  87.00000  93.70000 100.00000 
+    range     stdev   missing 
+ 82.00000  15.88220   0.00000 
+[1] "minimum  : 18.0000"
+[1] "percent10: 53.0000"
+[1] "quartile1: 69.0000"
+[1] "median   : 80.0000"
+[1] "mean     : 75.9138"
+[1] "quartile3: 87.0000"
+[1] "percent90: 93.7000"
+[1] "maximum  : 100.0000"
+[1] "range    : 82.0000"
+[1] "stdev    : 15.8822"
+[1] "missing  : 0.0000"

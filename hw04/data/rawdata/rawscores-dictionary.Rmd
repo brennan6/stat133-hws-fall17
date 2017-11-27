@@ -1,0 +1,36 @@
+---
+title: "rawscores-dictionary"
+author: "Matt Brennan"
+date: "11/25/2017"
+output: html_document
+---
+
+## Data `rawscores.RData`
+
+Here's the description of the R objects in `nba2017-salary-points.RData`:
+
+- `HW1`: score for HW1.
+- `HW2`: score for HW2.
+- `HW3`: score for HW3.
+- `HW4`: score for HW4.
+- `HW5`: score for HW5.
+- `HW6`: score for HW6.
+- `HW7`: score for HW7.
+- `HW8`: score for HW8.
+- `HW9`: score for HW9.
+- `ATT`: attendance score.
+- `QZ1`: score for QZ1.
+- `QZ2`: score for QZ2.
+- `QZ3`: score for QZ3.
+- `QZ4`: score for QZ4.
+- `EZ1`: score for EZ1.
+- `EZ2`: score for EZ2.
+
+There are six differnt scores for ATT:
++ `100`: for score of 12 or 11.
++ `80`: for score of 10.
++ `60`: for score of 9.
++ `40`: for score of 8.
++ `20`: for score of 7.
++ `0`: for score of 6 or less.
+
