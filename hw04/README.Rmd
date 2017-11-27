@@ -10,8 +10,13 @@ HW04 - Grades Visualizer
 The purpose of this HW is to grasp a better understanding of the nuances in creating functions, and utilizing them together to create objects. Further, there is a substantial portion that involves the utilization of Shiny App.
 
 
+
+```{r}
 library(shiny)
 
 #Run an app from a subdirectory in your repo
 runGitHUb("stat133-hws-fall17", "brennan6", subdir = "hw04/app")
+```
+
+
 
