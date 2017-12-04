@@ -94,8 +94,15 @@ server = function(input, output){
     plot(dat[ , input$x], dat[ , input$y],
          xlim = c(-1, 101), ylim = c(-1,101), cex = input$sliders, panel.first = grid(col = 'blue'),
          xlab = input$x, ylab = input$y, pch = 1)
+    if (input$radios == 'lm'){
+      abline(lm(dat[ , input$y] ~ dat[ , input$x]), col = 'red', lwd = 3)}
+    else if (input$radios == 'loess'){
+      data = lowess(dat[ , input$x] , y = dat[ , input$y])
+      lines(data, lwd = 3, col = 'blue')}
+  })
     
-    output$correlation = renderText(print(cor(dat[ , input$x], dat[, input$y])))
+    output$correlation = renderText({
+      print(cor(dat[ , input$x], dat[, input$y]))
   })
   
 }
